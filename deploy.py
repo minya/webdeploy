@@ -19,7 +19,7 @@ class Deploy(object):
 
 	def IsStaticContained(self, item):
 		ext = self.getExtension(item)
-		return ext == ".aspx" or ext == ".ascx" or ext == ".htm"
+		return ext.lower() in [".aspx", ".ascx", ".htm", ".master"]
 
 	def GetSuffix(self, path):
 		if self.IsStatic(path):
