@@ -7,16 +7,16 @@ class suffix_sha1:
 
 	def add(self, path):
 		dir, file = os.path.split(path)
-		if not self._hashes.has_key(file):
-			self._hashes[file] = hashlib.sha1()
+		file_lw = file.lower()
+		if not self._hashes.has_key(file_lw):
+			self._hashes[file_lw] = hashlib.sha1()
 		f = open(path)
-		self._hashes[file].update(f.read())
+		self._hashes[file_lw].update(f.read())
 		f.close()
 
 	def getName(self, origName):
 		base, ext = os.path.splitext(origName)
-		return base + "." + self._hashes[origName].hexdigest() + ext
+		return base + "." + self._hashes[origName.lower()].hexdigest() + ext
 
 	def keys(self):
 		return self._hashes.keys()
-  

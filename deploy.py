@@ -36,6 +36,14 @@ class Deploy(object):
 		search.Go(self.GetSuffix)
 		search.Go(self.Copy)
 
+	def find_and_replace(self, item, line):
+		i = line.lower().find(item)
+		while i >= 0:
+			new_name = self.sfx.getName(item)
+			line = line[0:i] + new_name + line[i+len(item):len(line)]
+			i = line.lower().find(item)
+		return line
+
 	def copyReplaced(self, path):
 		rel = os.path.relpath(path, self.source)
 		if self.IsStatic(rel):
@@ -48,9 +56,7 @@ class Deploy(object):
 		ftarget = open(target, "w")
 		for line in open(path).readlines():
 			for item in self.sfx.keys():
-				if line.find(item) >= 0:
-					new_name = self.sfx.getName(item)
-					line = line.replace(item, new_name)
+				line = self.find_and_replace(item, line)
 			ftarget.writelines(line)
 
 	def copy_as_is(self, path):
