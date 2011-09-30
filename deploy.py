@@ -38,7 +38,7 @@ class Deploy(object):
 
 	def find_and_replace(self, item, line):
 		i = line.lower().find(item)
-		while i > 0 and (line[i] == "\"" or line[i] == "'" or line[i] == "/"):
+		while i > 0 and (line[i-1] == "\"" or line[i-1] == "'" or line[i-1] == "/"):
 			new_name = self.sfx.getName(item)
 			line = line[0:i] + new_name + line[i+len(item):len(line)]
 			i = line.lower().find(item)
