@@ -26,7 +26,7 @@ class Deploy(object):
 			self.sfx.add(path)
 
 	def Copy(self, path):
-		if self.IsStatic(path) or self.IsStaticContaind(path):
+		if self.IsStatic(path) or self.IsStaticContained(path):
 			self.copyReplaced(path)
 		else:
 			self.copy_as_is(path)
