@@ -11,4 +11,3 @@ if os.path.exists(dst):
 os.mkdir(dst)
 d = Deploy(src, dst)
 d.Deploy()
-
