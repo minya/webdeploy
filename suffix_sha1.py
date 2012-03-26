@@ -10,7 +10,7 @@ class suffix_sha1:
 		file_lw = file.lower()
 		if not self._hashes.has_key(file_lw):
 			self._hashes[file_lw] = hashlib.sha1()
-		f = open(path)
+		f = open(path, "rb")
 		self._hashes[file_lw].update(f.read())
 		f.close()
 
